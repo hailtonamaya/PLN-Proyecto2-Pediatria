@@ -1,0 +1,30 @@
+{
+  "paths": {
+    "raw_data": "data/raw",
+    "processed_data": "data/processed",
+    "vector_db": "data/vector_db"
+  },
+
+  "models": {
+    "embedding_model": "nomic-embed-text",
+    "llm_model": "llama3.2:3b"
+  },
+
+  "vector_database": {
+    "provider": "chroma",
+    "collection_name": "pediatria_corpus"
+  },
+
+  "chunking": {
+    "chunk_size": 1000,
+    "chunk_overlap": 200
+  },
+
+  "retrieval": {
+    "top_k": 5
+  },
+
+  "ollama": {
+    "base_url": "http://localhost:11434"
+  }
+}
