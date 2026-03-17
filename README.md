@@ -36,7 +36,7 @@ config.json
 Para procesar los documentos y construir la base vectorial ejecutar:
 
 ```bash
-python run_pipeline.py
+python -m src.run_pipeline
 ```
 
 Este script ejecuta automáticamente:
@@ -53,7 +53,7 @@ Este script ejecuta automáticamente:
 Para realizar pruebas del sistema de recuperación y generación:
 
 ```bash
-python test_rag.py
+python -m src.test_rag
 ```
 
 Esto iniciará una interfaz de prueba para realizar preguntas al sistema.
