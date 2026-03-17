@@ -1,5 +1,5 @@
 from mcp.server.fastmcp import FastMCP
-from pipeline.RAG import ask_rag
+from src.RAG.rag_pipeline import ask_rag
 
 mcp = FastMCP("compliance-auditor")
 

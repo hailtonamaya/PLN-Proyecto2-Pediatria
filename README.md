@@ -1,82 +1,122 @@
-# GDPR Compliance Auditor (Mini Proyecto PLN)
+# Pediatric Medical RAG System
+
+Mini proyecto de **Procesamiento de Lenguaje Natural (PLN)** que implementa un sistema **Retrieval-Augmented Generation (RAG)** para consultas médicas en pediatría utilizando **Ollama + ChromaDB**.
+
+El sistema procesa documentos médicos, construye una base vectorial y permite realizar consultas semánticas sobre el contenido.
 
 ---
 
-## Funcionamiento
+# Requisitos
 
-El sistema realiza los siguientes pasos:
+* Python **3.10+**
+* Ollama instalado
 
-1. Extrae texto del reglamento en PDF.
-2. Limpia el documento jurídico (elimina recitals y normaliza texto).
-3. Divide el documento en fragmentos semánticos (chunking).
-4. Genera embeddings usando Ollama.
-5. Construye una base vectorial persistente con ChromaDB.
-6. Permite realizar búsqueda semántica sobre la normativa.
+https://ollama.com/
 
----
-
-## Requisitos
-
-- Python 3.10 o superior
-- Ollama instalado  
-  https://ollama.com/
-
-
-## Ejecución paso a paso
-
-### 1️⃣ Convertir PDF a texto
+Instalar dependencias:
 
 ```bash
-python -m pipeline.pdf_to_text <ruta_a_archivos>
-```
-
-Genera:
-
-```
-data/raw/nombre_archivo.txt
+pip install -r requirements.txt
 ```
 
 ---
 
-### 2️⃣ Limpiar documento
+# Configuración
+
+Toda la configuración del sistema se encuentra en:
+
+```
+config.json
+```
+
+---
+
+# Construcción del Pipeline
+
+Para procesar los documentos y construir la base vectorial ejecutar:
 
 ```bash
-python -m pipeline.clean_text
+python run_pipeline.py
 ```
 
-Genera:
+Este script ejecuta automáticamente:
 
-```
-data/processed/nombre_archivo_clean.txt
-```
+1. extracción de texto
+2. limpieza del documento
+3. construcción de embeddings
+4. creación de la base vectorial
 
 ---
 
-### 3️⃣ Construir base vectorial
+# Probar el Sistema RAG
+
+Para realizar pruebas del sistema de recuperación y generación:
 
 ```bash
-python -m pipeline.build_vector_db
+python test_rag.py
 ```
 
-Esto creará:
+Esto iniciará una interfaz de prueba para realizar preguntas al sistema.
+
+Ejemplo:
 
 ```
-data/chroma_db/
+Pregunta: ¿Qué es la fontanela en un recién nacido?
 ```
+
+El sistema devolverá una respuesta basada únicamente en la base médica.
 
 ---
 
-### 5️⃣ Probar búsqueda semántica
+# API de Consulta
+
+El sistema incluye una **API para realizar consultas al RAG**.
+
+Ejecutar la API:
 
 ```bash
-python -m pipeline.RAG
+uvicorn src.api.rag_api:app --reload
 ```
 
-El sistema devolverá una respuesta segun lo que se le pregunte.
+La API estará disponible en:
+
+```
+http://localhost:8000
+```
+
+Documentación interactiva:
+
+```
+http://localhost:8000/docs
+```
 
 ---
 
-## Autor
+# Endpoint principal
 
-Mini proyecto – Procesamiento de Lenguaje Natural
-By Diego Botto & Hailton Amaya
+POST `/ask`
+
+Request:
+
+```json
+{
+  "question": "¿Qué es la fontanela en un bebé?"
+}
+```
+
+Response:
+
+```json
+{
+  "answer": "La fontanela es..."
+}
+```
+
+---
+
+# Autor
+
+Mini Proyecto – Procesamiento de Lenguaje Natural
+
+Diego Botto
+Hailton Amaya
