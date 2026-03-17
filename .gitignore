@@ -1,5 +1,7 @@
 venv/*
-Data/*
+Data/raw/*.txt
+Data/processed/
+Data/vector_db/*
 logs/*
 src/pipeline/__pycache__/*
 src/RAG/__pycache__/*
